@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-void mallocMatrix(Matrix* matrix) {
+void allocMatrix(Matrix* matrix) {
 	matrix->size = matrix->rows * matrix->cols;
 	matrix->data = (double*)malloc(matrix->size * sizeof(double));
 	matrix->memFreed = false;
@@ -48,8 +48,8 @@ void scalarMul(Matrix* matrix, double scalar) {
 }
 
 /*
-	Performs an inefficient matrix multiplication algorithm and stores the resulting matrix in a given address
-	Stores the result matDest of matA * matB
+	Performs an inefficient matrix multiplication algorithm and stores the resulting matrix at a given address
+	Stores the result `matDest` of `matA * matB`
 */
 void matrixMultiplication(Matrix* matA, Matrix* matB, Matrix* matDest) {
 	
