@@ -82,3 +82,16 @@ void matrixMultiplication(Matrix* matA, Matrix* matB, Matrix* matDest) {
 	free(col);
 	free(row);
 }
+
+/*
+	Adds matB to matA and stores the result in matA
+*/
+void matrixAddition(Matrix* matA, Matrix* matB) {
+	if ((matA->cols != matB->cols) || (matA->rows != matB->rows)) {
+		return;
+	}
+
+	for (size_t i = 0; i < matA->size; i++) {
+		matA->data[i] += matB->data[i];
+	}
+}
