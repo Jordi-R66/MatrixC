@@ -23,3 +23,5 @@ double getMatrixCase(Matrix* matrix, size_t row, size_t col);
 void scalarMul(Matrix* matrix, double scalar);
 void matrixMultiplication(Matrix* matA, Matrix* matB, Matrix* matDest);
 void matrixAddition(Matrix* matA, Matrix* matB);
+
+void genIdentityMatrix(Matrix* matrix, size_t n);

@@ -95,3 +95,19 @@ void matrixAddition(Matrix* matA, Matrix* matB) {
 		matA->data[i] += matB->data[i];
 	}
 }
+
+void genIdentityMatrix(Matrix* matrix, size_t n) {
+	matrix->cols = n;
+	matrix->rows = n;
+	allocMatrix(matrix);
+}
+
+bool isInvertible(Matrix* matrix) {
+	if (matrix->rows != matrix->cols) {
+		return false;
+	}
+
+	size_t dim = matrix->cols;
+
+	Matrix IdentityMatrix;
+}
