@@ -42,7 +42,7 @@ double getMatrixCase(Matrix* matrix, size_t row, size_t col) {
 }
 
 void scalarMul(Matrix* matrix, double scalar) {
-	for (size_t i=0; i < matrix->size; i++) {
+	for (size_t i = 0; i < matrix->size; i++) {
 		matrix->data[i] *= scalar;
 	}
 }
