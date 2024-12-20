@@ -34,3 +34,11 @@ void scalarMul(Matrix* matrix, double scalar) {
 		matrix->data[i] *= scalar;
 	}
 }
+
+/*
+	Performs an inefficient matrix multiplication algorithm and stores the resulting matrix in a given address
+	Stores the result matDest of matA * matB
+*/
+void matrixMultiplication(Matrix* matA, Matrix* matB, Matrix* matDest) {
+	
+}
