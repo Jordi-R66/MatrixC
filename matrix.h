@@ -6,7 +6,7 @@
 #include <stdbool.h>
 
 typedef struct Matrix {
-	size_t rows, cols, elements;
+	size_t rows, cols, size;
 
 	double* data;
 	bool memFreed;
