@@ -29,6 +29,18 @@ void getMatrixColumn(Matrix* matrix, size_t column, double* colBuffer) {
 	}
 }
 
+void setMatrixCase(Matrix* matrix, double value, size_t row, size_t col) {
+	size_t i = row * matrix->cols + col;
+
+	matrix->data[i] = value;
+}
+
+double getMatrixCase(Matrix* matrix, size_t row, size_t col) {
+	size_t i = row * matrix->cols + col;
+
+	return matrix->data[i];
+}
+
 void scalarMul(Matrix* matrix, double scalar) {
 	for (size_t i=0; i < matrix->size; i++) {
 		matrix->data[i] *= scalar;
