@@ -52,5 +52,33 @@ void scalarMul(Matrix* matrix, double scalar) {
 	Stores the result `matDest` of `matA * matB`
 */
 void matrixMultiplication(Matrix* matA, Matrix* matB, Matrix* matDest) {
-	
+	if (matA->cols != matB->rows) {
+		return;
+	}
+
+	matDest->rows = matA->rows;
+	matDest->cols = matB->cols;
+
+	allocMatrix(matDest);
+
+	double* col = (double*)calloc(matDest->rows, sizeof(double));
+	double* row = (double*)calloc(matDest->cols, sizeof(double));
+
+	for (size_t i = 0; i < matDest->rows; i++) {
+		for (size_t j = 0; j < matDest->cols; j++) {
+			double newValue = 0.0;
+
+			getMatrixRow(matA, i, row);
+			getMatrixColumn(matB, j, col);
+
+			for (size_t k = 0; k < matB->cols; k++) {
+				newValue += col[k] * row[k];
+			}
+
+			setMatrixCase(matDest, newValue, i, j);
+		}
+	}
+
+	free(col);
+	free(row);
 }
