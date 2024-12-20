@@ -2,7 +2,7 @@
 
 void allocMatrix(Matrix* matrix) {
 	matrix->size = matrix->rows * matrix->cols;
-	matrix->data = (double*)malloc(matrix->size * sizeof(double));
+	matrix->data = (double*)calloc(matrix->size, sizeof(double));
 	matrix->memFreed = false;
 }
 
