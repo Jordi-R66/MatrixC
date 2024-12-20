@@ -17,3 +17,5 @@ void deallocMatrix(Matrix* matrix);
 
 void getMatrixRow(Matrix* matrix, size_t row, double* rowBuffer);
 void getMatrixColumn(Matrix* matrix, size_t column, double* colBuffer);
+
+void scalarMul(Matrix* matrix, double scalar);
