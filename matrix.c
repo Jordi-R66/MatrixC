@@ -30,7 +30,7 @@ void getMatrixColumn(Matrix* matrix, size_t column, double* colBuffer) {
 }
 
 void setMatrixRow(Matrix* matrix, size_t row, double* rowBuffer) {
-	for (size_t i=0; i < matrix->cols; i++) {
+	for (size_t i = 0; i < matrix->cols; i++) {
 		double val = rowBuffer[i];
 		setMatrixCase(matrix, val, row, i);
 	}
