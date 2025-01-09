@@ -15,6 +15,9 @@ void deallocMatrix(Matrix* matrix);
 void getMatrixRow(Matrix* matrix, size_t row, double* rowBuffer);
 void getMatrixColumn(Matrix* matrix, size_t column, double* colBuffer);
 
+void setMatrixRow(Matrix* matrix, size_t row, double* rowBuffer);
+void setMatrixColumn(Matrix* matrix, size_t column, double* colBuffer);
+
 void setMatrixCase(Matrix* matrix, double value, size_t row, size_t col);
 double getMatrixCase(Matrix* matrix, size_t row, size_t col);
 
