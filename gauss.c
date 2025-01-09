@@ -21,10 +21,11 @@ void subtractRows(Matrix* mat, size_t rowAId, size_t rowBId, double coeffRowB) {
 	double* rowB = (double*)calloc(mat->cols, sizeof(double));
 
 	getMatrixRow(mat, rowAId, rowA);
+	multiplyRow(mat, rowBId, coeffRowB);
 	getMatrixRow(mat, rowBId, rowB);
 
 	for (size_t i=0; i < mat->cols; i++) {
-		rowA[i] -= coeffRowB * rowB[i];
+		rowA[i] -= rowB[i];
 	}
 
 	setMatrixRow(mat, rowAId, rowA);
@@ -37,5 +38,17 @@ void subtractRows(Matrix* mat, size_t rowAId, size_t rowBId, double coeffRowB) {
 }
 
 void multiplyRow(Matrix* mat, size_t rowId, double coeffRow) {
+	double* row = (double*)calloc(mat->cols, sizeof(double));
+
+	getMatrixRow(mat, rowId, row);
+
+	for (size_t i=0; i < mat->cols; i++) {
+		row[i] *= coeffRow;
+	}
+
+	setMatrixRow(mat, rowId, row);
+
+	free(row);
+
 	return;
 }
