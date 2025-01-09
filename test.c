@@ -32,7 +32,7 @@ int main(void) {
 
 	printMatrix(&C);
 
-	swapRows(&C, 0, 2);
+	subtractRows(&C, 0, 2, 1);
 
 	printf("-------------------------\n");
 
