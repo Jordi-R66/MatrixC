@@ -9,20 +9,20 @@ int main(void) {
 	Matrix A;
 
 	A.rows = 3;
-	A.cols = 2;
+	A.cols = 3;
 
 	allocMatrix(&A);
 	Matrix B;
 
-	B.rows = 2;
-	B.cols = 4;
+	B.rows = 3;
+	B.cols = 3;
 
 	allocMatrix(&B);
 
 	Matrix C;
 
-	double A_content[] = { 1.0, -2.0, 2.0, 0.0, -1.0, 4.0 };
-	double B_content[] = { 0.0, 2.0, 1.0, -1.0, -2.0, 3.0, 1.0, 0.0 };
+	double A_content[] = { -2, 1, -3, 4, 1, 3, 4, -1 ,5 };
+	double B_content[] = { -5, 1, -3, 4, -2, 3, 4, -1, 2 };
 
 	memcpy(A.data, A_content, sizeof(A_content));
 	memcpy(B.data, B_content, sizeof(B_content));
