@@ -1,6 +1,8 @@
 #include "common.h"
 #include "matrix.h"
 
+#include "gauss.h"
+
 int main(void) {
 	double* row_buffer;
 
@@ -27,6 +29,12 @@ int main(void) {
 
 	matrixMultiplication(&A, &B, &C);
 	row_buffer = (double*)calloc(C.cols, sizeof(double));
+
+	printMatrix(&C);
+
+	swapRows(&C, 0, 2);
+
+	printf("-------------------------\n");
 
 	printMatrix(&C);
 
