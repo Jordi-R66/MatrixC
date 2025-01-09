@@ -139,3 +139,18 @@ void genIdentityMatrix(Matrix* matrix, size_t n) {
 		setMatrixCase(matrix, 1.0, i, i);
 	}
 }
+
+void printMatrix(Matrix* matrix) {
+	double* row_buffer = (double*)calloc(matrix->cols, sizeof(double));
+
+	for (size_t row = 0; row < matrix->rows; row++) {
+		getMatrixRow(matrix, row, row_buffer);
+
+		for (size_t i = 0; i < matrix->cols; i++) {
+			printf("%.0lf ", row_buffer[i]);
+		}
+		printf("\n");
+	}
+
+	free(row_buffer);
+}

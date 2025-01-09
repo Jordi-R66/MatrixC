@@ -28,14 +28,7 @@ int main(void) {
 	matrixMultiplication(&A, &B, &C);
 	row_buffer = (double*)calloc(C.cols, sizeof(double));
 
-	for (size_t row = 0; row < C.rows; row++) {
-		getMatrixRow(&C, row, row_buffer);
-
-		for (size_t i = 0; i < C.cols; i++) {
-			printf("%.0f ", row_buffer[i]);
-		}
-		printf("\n");
-	}
+	printMatrix(&C);
 
 	deallocMatrix(&A);
 	deallocMatrix(&B);
