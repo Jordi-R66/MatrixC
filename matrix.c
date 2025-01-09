@@ -1,5 +1,4 @@
 #include "matrix.h"
-#include <stdio.h>
 
 void allocMatrix(Matrix* matrix) {
 	matrix->size = matrix->rows * matrix->cols;

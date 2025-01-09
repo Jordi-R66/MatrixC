@@ -1,8 +1,6 @@
 #pragma once
 
-#include <stdint.h>
-#include <stdlib.h>
-#include <stdbool.h>
+#include "common.h"
 
 typedef struct Matrix {
 	size_t rows, cols, size;
