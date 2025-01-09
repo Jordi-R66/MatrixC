@@ -30,10 +30,6 @@ void getMatrixColumn(Matrix* matrix, size_t column, double* colBuffer) {
 }
 
 void setMatrixRow(Matrix* matrix, size_t row, double* rowBuffer) {
-	if (sizeof(rowBuffer) != matrix->cols) {
-		return;
-	}
-
 	for (size_t i=0; i < matrix->cols; i++) {
 		double val = rowBuffer[i];
 		setMatrixCase(matrix, val, row, i);
@@ -41,7 +37,7 @@ void setMatrixRow(Matrix* matrix, size_t row, double* rowBuffer) {
 }
 
 void setMatrixColumn(Matrix* matrix, size_t column, double* colBuffer) {
-	if (sizeof(colBuffer) != matrix->rows) {
+	if (sizeof(colBuffer) != (matrix->rows / sizeof(double))) {
 		return;
 	}
 
