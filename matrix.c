@@ -107,14 +107,14 @@ void genIdentityMatrix(Matrix* matrix, size_t n) {
 	matrix->cols = n;
 	matrix->rows = n;
 	allocMatrix(matrix);
-}
 
-bool isInvertible(Matrix* matrix) {
-	if (matrix->rows != matrix->cols) {
-		return false;
+	for (size_t i = 0; i < matrix->cols; i++) {
+		for (size_t j = 0; j < matrix->rows; j++) {
+			setMatrixCase(matrix, 0.0, j, i);
+		}
 	}
 
-	size_t dim = matrix->cols;
-
-	Matrix IdentityMatrix;
+	for (size_t i = 0; i < matrix->cols; i++) {
+		setMatrixCase(matrix, 1.0, i, i);
+	}
 }
