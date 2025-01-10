@@ -149,7 +149,7 @@ void printMatrix(Matrix* matrix) {
 		getMatrixRow(matrix, row, row_buffer);
 
 		for (size_t i = 0; i < matrix->cols; i++) {
-			printf("%.0lf ", row_buffer[i]);
+			printf("%.2lf\t", row_buffer[i]);
 		}
 		printf("\n");
 	}

@@ -12,19 +12,19 @@ int main(void) {
 	A.cols = 3;
 
 	allocMatrix(&A);
-	Matrix B;
+	//Matrix B;
 
-	B.rows = 3;
-	B.cols = 3;
+	//B.rows = 3;
+	//B.cols = 3;
 
-	allocMatrix(&B);
+	//allocMatrix(&B);
 
-	Matrix C;
+	//Matrix C;
 
 	double A_content[] = {
 		-2, 1, -3,
-		4, 1, 3,
-		4, -1 ,5 };
+		4, 0, 3,
+		0, 0 ,5 };
 
 	double B_content[] = {
 		-5, 1, -3,
@@ -32,24 +32,31 @@ int main(void) {
 		4, -1, 2 };
 
 	setMatrix(&A, A_content);
-	setMatrix(&B, B_content);
+	//setMatrix(&B, B_content);
 
-	matrixMultiplication(&A, &B, &C);
-	row_buffer = (double*)calloc(C.cols, sizeof(double));
-
-	printMatrix(&C);
-
-	//subtractRows(&C, 0, 2, 1);
-
-	printf("-------------------------\n");
+	//matrixMultiplication(&A, &B, &C);
+	//row_buffer = (double*)calloc(C.cols, sizeof(double));
 
 	//printMatrix(&C);
 
-	deallocMatrix(&A);
-	deallocMatrix(&B);
-	deallocMatrix(&C);
+	//subtractRows(&C, 0, 2, 1);
 
-	free(row_buffer);
+	printMatrix(&A);
+
+	printf("-------------------------\n");
+
+	Swap* swaps = (Swap*)malloc(1 * sizeof(Swap));
+	size_t swapsMade = 0;
+
+	QuickSort(&A, 0, A.rows-1, &swaps, &swapsMade);
+
+	free(swaps);
+
+	deallocMatrix(&A);
+	//deallocMatrix(&B);
+	//deallocMatrix(&C);
+
+	//free(row_buffer);
 
 	return 0;
 }

@@ -96,18 +96,35 @@ void swapElements(size_t* arr, size_t a, size_t b) {
 	arr[a] -= arr[b];
 }
 
-void sortingSwap(Matrix* mat, size_t* pivots, size_t idA, size_t idB, Swap* swaps, size_t* swapsMade) {
+void sortingSwap(Matrix* mat, size_t* pivots, size_t idA, size_t idB, Swap** swaps, size_t* swapsMade) {
 	swapRows(mat, idA, idB);
 	swapElements(pivots, idA, idB);
 
 	*swapsMade += 1;
-	swaps = (Swap*)realloc(swaps, *swapsMade * sizeof(size_t));
+	printf("%lu <=> %lu\n", idA, idB);
+	printf("New size : %lu\n", *swapsMade);
+
+	if (*swapsMade > 1) {
+		printf("Old Pointer : %p\n", *swaps);
+		Swap* newPtr = (Swap*)realloc(*swaps, *swapsMade * sizeof(Swap));
+
+		if (newPtr != NULL) {
+			*swaps = newPtr;
+		} else {
+			fprintf(stderr, "Error or not enough space available in memory to continue\n");
+			exit(EXIT_FAILURE);
+		}
+
+		printf("New Pointer : %p\n", *swaps);
+	}
 
 	Swap newSwap = {idA, idB};
-	swaps[*swapsMade - 1] = newSwap;
+	(*swaps)[*swapsMade - 1] = newSwap;
+
+	printMatrix(mat);
 }
 
-size_t Partitioning(Matrix* mat, size_t firstId, size_t lastId, size_t pivotRowId, Swap* swaps, size_t* swapsMade) {
+size_t Partitioning(Matrix* mat, size_t firstId, size_t lastId, size_t pivotRowId, Swap** swaps, size_t* swapsMade) {
 	size_t* rowsGaussPivots = (size_t*)calloc(mat->rows, sizeof(size_t));
 
 	for (size_t i = 0; i < mat->rows; i++) {
@@ -136,7 +153,7 @@ size_t Partitioning(Matrix* mat, size_t firstId, size_t lastId, size_t pivotRowI
 	return j;
 }
 
-void QuickSort(Matrix* mat, size_t firstId, size_t lastId, Swap* swaps, size_t* swapsMade) {
+void QuickSort(Matrix* mat, size_t firstId, size_t lastId, Swap** swaps, size_t* swapsMade) {
 	size_t* rowsGaussPivots = (size_t*)calloc(mat->rows, sizeof(size_t));
 
 	for (size_t i = 0; i < mat->rows; i++) {
