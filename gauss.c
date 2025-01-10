@@ -118,7 +118,7 @@ void sortingSwap(Matrix* mat, size_t* pivots, size_t idA, size_t idB, Swap** swa
 		printf("New Pointer : %p\n", *swaps);
 	}
 
-	Swap newSwap = {idA, idB};
+	Swap newSwap = { idA, idB };
 	(*swaps)[*swapsMade - 1] = newSwap;
 
 	printMatrix(mat);
