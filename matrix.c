@@ -59,6 +59,12 @@ double getMatrixCase(Matrix* matrix, size_t row, size_t col) {
 	return matrix->data[i];
 }
 
+void setMatrix(Matrix* matrix, double* values) {
+	for (size_t i = 0; i < matrix->size; i++) {
+		matrix->data[i] = values[i];
+	}
+}
+
 void scalarMul(Matrix* matrix, double scalar) {
 	for (size_t i = 0; i < matrix->size; i++) {
 		matrix->data[i] *= scalar;

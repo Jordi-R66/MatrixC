@@ -24,8 +24,8 @@ int main(void) {
 	double A_content[] = { -2, 1, -3, 4, 1, 3, 4, -1 ,5 };
 	double B_content[] = { -5, 1, -3, 4, -2, 3, 4, -1, 2 };
 
-	memcpy(A.data, A_content, sizeof(A_content));
-	memcpy(B.data, B_content, sizeof(B_content));
+	setMatrix(&A, A_content);
+	setMatrix(&B, B_content);
 
 	matrixMultiplication(&A, &B, &C);
 	row_buffer = (double*)calloc(C.cols, sizeof(double));

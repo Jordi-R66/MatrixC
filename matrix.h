@@ -21,6 +21,8 @@ void setMatrixColumn(Matrix* matrix, size_t column, double* colBuffer);
 void setMatrixCase(Matrix* matrix, double value, size_t row, size_t col);
 double getMatrixCase(Matrix* matrix, size_t row, size_t col);
 
+void setMatrix(Matrix* matrix, double* values);
+
 void scalarMul(Matrix* matrix, double scalar);
 void matrixMultiplication(Matrix* matA, Matrix* matB, Matrix* matDest);
 void matrixAddition(Matrix* matA, Matrix* matB);
