@@ -21,8 +21,15 @@ int main(void) {
 
 	Matrix C;
 
-	double A_content[] = { -2, 1, -3, 4, 1, 3, 4, -1 ,5 };
-	double B_content[] = { -5, 1, -3, 4, -2, 3, 4, -1, 2 };
+	double A_content[] = {
+		-2, 1, -3,
+		4, 1, 3,
+		4, -1 ,5 };
+
+	double B_content[] = {
+		-5, 1, -3,
+		4, -2, 3,
+		4, -1, 2 };
 
 	setMatrix(&A, A_content);
 	setMatrix(&B, B_content);
@@ -32,11 +39,11 @@ int main(void) {
 
 	printMatrix(&C);
 
-	subtractRows(&C, 0, 2, 1);
+	//subtractRows(&C, 0, 2, 1);
 
 	printf("-------------------------\n");
 
-	printMatrix(&C);
+	//printMatrix(&C);
 
 	deallocMatrix(&A);
 	deallocMatrix(&B);
