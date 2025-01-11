@@ -4,8 +4,6 @@
 #include "gauss.h"
 
 int main(void) {
-	double* row_buffer;
-
 	Matrix A;
 
 	A.rows = 3;
