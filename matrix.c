@@ -95,15 +95,9 @@ void matrixMultiplication(Matrix* matA, Matrix* matB, Matrix* matDest) {
 			getMatrixRow(matA, i, row);
 			getMatrixColumn(matB, j, col);
 
-			//printf("c_%lu_%lu = ", i, j);
-
 			for (size_t k = 0; k < matB->cols; k++) {
-				//char* sep = k < (matB->cols - 1) ? " + " : " = ";
 				newValue += col[k] * row[k];
-				//printf("%lf * %lf%s", row[k], col[k], sep);
 			}
-
-			//printf("%lf\n", newValue);
 
 			setMatrixCase(matDest, newValue, i, j);
 		}
