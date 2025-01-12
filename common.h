@@ -1,17 +1,3 @@
-<<<<<<< Updated upstream
-#pragma once
-
-#include <stdio.h>
-#include <string.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <time.h>
-
-typedef struct Swap {
-	size_t A, B;
-} Swap;
-=======
 #pragma once
 
 #include <stdio.h>
@@ -32,4 +18,3 @@ typedef struct Swap {
 #endif
 
 typedef VALUE_TYPE value_t;
->>>>>>> Stashed changes
