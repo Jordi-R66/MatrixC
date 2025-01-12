@@ -2,7 +2,7 @@
 
 void allocMatrix(Matrix* matrix) {
 	matrix->size = matrix->rows * matrix->cols;
-	matrix->data = (double*)calloc(matrix->size, sizeof(double));
+	matrix->data = (value_t*)calloc(matrix->size, sizeof(value_t));
 	matrix->memFreed = false;
 }
 
@@ -11,7 +11,7 @@ void deallocMatrix(Matrix* matrix) {
 	matrix->memFreed = true;
 }
 
-void getMatrixRow(Matrix* matrix, size_t row, double* rowBuffer) {
+void getMatrixRow(Matrix* matrix, size_t row, value_t* rowBuffer) {
 	size_t iStart, iEnd;
 
 	iStart = row * matrix->cols;
@@ -22,50 +22,50 @@ void getMatrixRow(Matrix* matrix, size_t row, double* rowBuffer) {
 	}
 }
 
-void getMatrixColumn(Matrix* matrix, size_t column, double* colBuffer) {
+void getMatrixColumn(Matrix* matrix, size_t column, value_t* colBuffer) {
 	for (size_t row = 0; row < matrix->rows; row++) {
 		size_t i = row * matrix->cols + column;
 		colBuffer[row] = matrix->data[i];
 	}
 }
 
-void setMatrixRow(Matrix* matrix, size_t row, double* rowBuffer) {
+void setMatrixRow(Matrix* matrix, size_t row, value_t* rowBuffer) {
 	for (size_t i = 0; i < matrix->cols; i++) {
-		double val = rowBuffer[i];
+		value_t val = rowBuffer[i];
 		setMatrixCase(matrix, val, row, i);
 	}
 }
 
-void setMatrixColumn(Matrix* matrix, size_t column, double* colBuffer) {
-	if (sizeof(colBuffer) != (matrix->rows / sizeof(double))) {
+void setMatrixColumn(Matrix* matrix, size_t column, value_t* colBuffer) {
+	if (sizeof(colBuffer) != (matrix->rows / sizeof(value_t))) {
 		return;
 	}
 
 	for (size_t i = 0; i < matrix->rows; i++) {
-		double val = colBuffer[i];
+		value_t val = colBuffer[i];
 		setMatrixCase(matrix, val, i, column);
 	}
 }
 
-void setMatrixCase(Matrix* matrix, double value, size_t row, size_t col) {
+void setMatrixCase(Matrix* matrix, value_t value, size_t row, size_t col) {
 	size_t i = row * matrix->cols + col;
 
 	matrix->data[i] = value;
 }
 
-double getMatrixCase(Matrix* matrix, size_t row, size_t col) {
+value_t getMatrixCase(Matrix* matrix, size_t row, size_t col) {
 	size_t i = row * matrix->cols + col;
 
 	return matrix->data[i];
 }
 
-void setMatrix(Matrix* matrix, double* values) {
+void setMatrix(Matrix* matrix, value_t* values) {
 	for (size_t i = 0; i < matrix->size; i++) {
 		matrix->data[i] = values[i];
 	}
 }
 
-void scalarMul(Matrix* matrix, double scalar) {
+void scalarMul(Matrix* matrix, value_t scalar) {
 	for (size_t i = 0; i < matrix->size; i++) {
 		matrix->data[i] *= scalar;
 	}
@@ -85,12 +85,12 @@ void matrixMultiplication(Matrix* matA, Matrix* matB, Matrix* matDest) {
 
 	allocMatrix(matDest);
 
-	double* col = (double*)calloc(matDest->rows, sizeof(double));
-	double* row = (double*)calloc(matDest->cols, sizeof(double));
+	value_t* col = (value_t*)calloc(matDest->rows, sizeof(value_t));
+	value_t* row = (value_t*)calloc(matDest->cols, sizeof(value_t));
 
 	for (size_t i = 0; i < matDest->rows; i++) {
 		for (size_t j = 0; j < matDest->cols; j++) {
-			double newValue = 0.0;
+			value_t newValue = 0.0;
 
 			getMatrixRow(matA, i, row);
 			getMatrixColumn(matB, j, col);
@@ -137,7 +137,7 @@ void genIdentityMatrix(Matrix* matrix, size_t n) {
 }
 
 void printMatrix(Matrix* matrix) {
-	double* row_buffer = (double*)calloc(matrix->cols, sizeof(double));
+	value_t* row_buffer = (value_t*)calloc(matrix->cols, sizeof(value_t));
 
 	for (size_t row = 0; row < matrix->rows; row++) {
 		getMatrixRow(matrix, row, row_buffer);
