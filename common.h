@@ -7,8 +7,14 @@
 #include <stdbool.h>
 #include <time.h>
 
+typedef enum SwapType {
+	Line = 0,
+	Column = 1
+} SwapType;
+
 typedef struct Swap {
 	size_t A, B;
+	SwapType type;
 } Swap;
 
 #if defined(__x86_64__) || defined(_M_X64)
