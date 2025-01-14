@@ -150,3 +150,111 @@ void printMatrix(Matrix* matrix) {
 
 	free(row_buffer);
 }
+
+// Originally in gauss.c
+
+
+void recordSwap(size_t idA, size_t idB, SwapType type, Swap** swaps, size_t* swapsMade) {
+	if (idA == idB) {
+		return;
+	}
+
+	*swapsMade += 1;
+
+	Swap* newPtr = (Swap*)realloc(*swaps, *swapsMade * sizeof(Swap));
+
+	if (newPtr != NULL) {
+		*swaps = newPtr;
+	}
+	else {
+		fprintf(stderr, "Error or not enough space available in memory to continue\n");
+		exit(EXIT_FAILURE);
+	}
+
+	Swap newSwap = { idA, idB, type };
+	(*swaps)[*swapsMade - 1] = newSwap;
+}
+
+void swapRows(Matrix* mat, size_t rowAId, size_t rowBId) {
+	if (rowAId == rowBId) {
+		return;
+	}
+
+	if ((rowAId >= mat->rows) || (rowBId >= mat->rows)) {
+		fprintf(stderr, "Error: row index out of bounds\n\tidA = %lu\n\tidB = %lu\n", rowAId, rowBId);
+		exit(EXIT_FAILURE);
+	}
+
+	value_t* rowA = (value_t*)calloc(mat->cols, sizeof(value_t));
+	value_t* rowB = (value_t*)calloc(mat->cols, sizeof(value_t));
+
+	getMatrixRow(mat, rowAId, rowA);
+	getMatrixRow(mat, rowBId, rowB);
+
+	setMatrixRow(mat, rowAId, rowB);
+	setMatrixRow(mat, rowBId, rowA);
+
+	free(rowB);
+	free(rowA);
+
+	return;
+}
+
+void swapCols(Matrix* mat, size_t colAId, size_t colBId) {
+	if (colAId == colBId) {
+		return;
+	}
+
+	if ((colAId >= mat->cols) || (colBId >= mat->cols)) {
+		fprintf(stderr, "Error: row index out of bounds\n\tidA = %lu\n\t idB = %lu\n", colAId, colBId);
+		exit(EXIT_FAILURE);
+	}
+
+	value_t* colA = (value_t*)calloc(mat->rows, sizeof(value_t));
+	value_t* colB = (value_t*)calloc(mat->rows, sizeof(value_t));
+
+	getMatrixColumn(mat, colBId, colB);
+	getMatrixColumn(mat, colAId, colA);
+
+	setMatrixColumn(mat, colAId, colB);
+	setMatrixColumn(mat, colBId, colA);
+
+	free(colB);
+	free(colA);
+
+	return;
+}
+
+void subtractRows(Matrix* mat, size_t rowAId, size_t rowBId, value_t coeffRowB) {
+	value_t* rowA = (value_t*)calloc(mat->cols, sizeof(value_t));
+	value_t* rowB = (value_t*)calloc(mat->cols, sizeof(value_t));
+
+	getMatrixRow(mat, rowAId, rowA);
+	getMatrixRow(mat, rowBId, rowB);
+
+	for (size_t i = 0; i < mat->cols; i++) {
+		rowA[i] -= coeffRowB * rowB[i];
+	}
+
+	setMatrixRow(mat, rowAId, rowA);
+
+	free(rowA);
+	free(rowB);
+
+	return;
+}
+
+void multiplyRow(Matrix* mat, size_t rowId, value_t coeffRow) {
+	value_t* row = (value_t*)calloc(mat->cols, sizeof(value_t));
+
+	getMatrixRow(mat, rowId, row);
+
+	for (size_t i = 0; i < mat->cols; i++) {
+		row[i] *= coeffRow;
+	}
+
+	setMatrixRow(mat, rowId, row);
+
+	free(row);
+	return;
+}
