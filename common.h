@@ -8,7 +8,7 @@
 #include <time.h>
 
 typedef enum SwapType {
-	Line = 0,
+	Row = 0,
 	Column = 1
 } SwapType;
 
