@@ -33,3 +33,15 @@ void mirrorMatrix(Matrix* mat, SwapType toSwap, Swap** swaps, size_t* swapsMade)
 			exit(EXIT_FAILURE);
 	}
 }
+
+bool inversibiltyCheck(Matrix* mat) {
+	bool result = true;
+
+	result &= mat->cols == mat->rows;
+
+	if (result) {
+		prepareGauss();
+	}
+
+	return result;
+}

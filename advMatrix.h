@@ -6,4 +6,5 @@
 
 void mirrorMatrix(Matrix* mat, SwapType toSwap, Swap** swaps, size_t* swapsMade);
 
+bool inversibilityCheck(Matrix* mat);
 void inverseMatrix(Matrix* mat, Matrix* invMat);
