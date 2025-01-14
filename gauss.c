@@ -25,6 +25,31 @@ void swapRows(Matrix* mat, size_t rowAId, size_t rowBId) {
 	return;
 }
 
+void swapCols(Matrix* mat, size_t colAId, size_t colBId) {
+	if (colAId == colBId) {
+		return;
+	}
+
+	if ((colAId >= mat->cols) || (colBId >= mat->cols)) {
+		fprintf(stderr, "Error: row index out of bounds\n\tidA = %lu\n\t idB = %lu\n", colAId, colBId);
+		exit(EXIT_FAILURE);
+	}
+
+	value_t* colA = (value_t*)calloc(mat->rows, sizeof(value_t));
+	value_t* colB = (value_t*)calloc(mat->rows, sizeof(value_t));
+
+	getMatrixColumn(mat, colBId, colB);
+	getMatrixColumn(mat, colAId, colA);
+
+	setMatrixColumn(mat, colAId, colB);
+	setMatrixColumn(mat, colBId, colA);
+
+	free(colB);
+	free(colA);
+
+	return;
+}
+
 void subtractRows(Matrix* mat, size_t rowAId, size_t rowBId, value_t coeffRowB) {
 	value_t* rowA = (value_t*)calloc(mat->cols, sizeof(value_t));
 	value_t* rowB = (value_t*)calloc(mat->cols, sizeof(value_t));
@@ -118,7 +143,7 @@ void sortingSwap(Matrix* mat, size_t* pivots, size_t idA, size_t idB, Swap** swa
 		exit(EXIT_FAILURE);
 	}
 
-	Swap newSwap = { idA, idB };
+	Swap newSwap = { idA, idB, Line };
 	(*swaps)[*swapsMade - 1] = newSwap;
 }
 

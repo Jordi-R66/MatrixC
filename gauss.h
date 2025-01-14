@@ -4,6 +4,7 @@
 #include "common.h"
 
 void swapRows(Matrix* mat, size_t rowAId, size_t rowBId);
+void swapCols(Matrix* mat, size_t colAId, size_t colBId);
 void subtractRows(Matrix* mat, size_t rowAId, size_t rowBId, value_t coeffRowB);
 void multiplyRow(Matrix* mat, size_t rowId, value_t coeffRow);
 
