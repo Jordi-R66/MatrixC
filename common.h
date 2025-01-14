@@ -21,6 +21,8 @@ typedef struct Swap {
 #define VALUE_TYPE double
 #elif defined(__i386__) || defined(_M_IX86)
 #define VALUE_TYPE float
+#else
+#error Unsupported target
 #endif
 
 typedef VALUE_TYPE value_t;
