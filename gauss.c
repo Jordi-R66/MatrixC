@@ -1,12 +1,33 @@
 #include "gauss.h"
 
+void recordSwap(size_t idA, size_t idB, SwapType type, Swap** swaps, size_t* swapsMade) {
+	if (idA == idB) {
+		return;
+	}
+
+	*swapsMade += 1;
+
+	Swap* newPtr = (Swap*)realloc(*swaps, *swapsMade * sizeof(Swap));
+
+	if (newPtr != NULL) {
+		*swaps = newPtr;
+	}
+	else {
+		fprintf(stderr, "Error or not enough space available in memory to continue\n");
+		exit(EXIT_FAILURE);
+	}
+
+	Swap newSwap = { idA, idB, type };
+	(*swaps)[*swapsMade - 1] = newSwap;
+}
+
 void swapRows(Matrix* mat, size_t rowAId, size_t rowBId) {
 	if (rowAId == rowBId) {
 		return;
 	}
 
 	if ((rowAId >= mat->rows) || (rowBId >= mat->rows)) {
-		fprintf(stderr, "Error: row index out of bounds\n\tidA = %lu\n\t idB = %lu\n", rowAId, rowBId);
+		fprintf(stderr, "Error: row index out of bounds\n\tidA = %lu\n\tidB = %lu\n", rowAId, rowBId);
 		exit(EXIT_FAILURE);
 	}
 
@@ -131,20 +152,7 @@ void sortingSwap(Matrix* mat, size_t* pivots, size_t idA, size_t idB, Swap** swa
 	swapRows(mat, idA, idB);
 	swapElements(pivots, idA, idB);
 
-	*swapsMade += 1;
-
-	Swap* newPtr = (Swap*)realloc(*swaps, *swapsMade * sizeof(Swap));
-
-	if (newPtr != NULL) {
-		*swaps = newPtr;
-	}
-	else {
-		fprintf(stderr, "Error or not enough space available in memory to continue\n");
-		exit(EXIT_FAILURE);
-	}
-
-	Swap newSwap = { idA, idB, Line };
-	(*swaps)[*swapsMade - 1] = newSwap;
+	recordSwap(idA, idB, Row, swaps, swapsMade);
 }
 
 /* -- QuickSort implementation, needs to be fixed so implemented BubbleSort instead

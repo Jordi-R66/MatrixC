@@ -3,6 +3,7 @@
 #include "matrix.h"
 #include "common.h"
 
+void recordSwap(size_t idA, size_t idB, SwapType type, Swap** swaps, size_t* swapsMade);
 void swapRows(Matrix* mat, size_t rowAId, size_t rowBId);
 void swapCols(Matrix* mat, size_t colAId, size_t colBId);
 void subtractRows(Matrix* mat, size_t rowAId, size_t rowBId, value_t coeffRowB);
