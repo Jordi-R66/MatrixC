@@ -1,12 +1,5 @@
 #pragma once
 
-#include <stdio.h>
-#include <string.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <time.h>
-
 #define VALUE_TYPE
 #define __64_BITS__
 
@@ -17,5 +10,12 @@
 #else
 #error Unsupported target
 #endif
+
+#include <stdio.h>
+#include <string.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <time.h>
 
 typedef VALUE_TYPE value_t;
