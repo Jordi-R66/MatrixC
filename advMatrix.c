@@ -1,16 +1,16 @@
 #include "advMatrix.h"
 
-void mirrorMatrix(Matrix* mat, SwapType toSwap, Swap** swaps, size_t* swapsMade) {
+void mirrorMatrix(Matrix* mat, SwapType type, Tracker* tracker) {
 	size_t j = 0;
 
-	switch (toSwap) {
+	switch (type) {
 		case Row:
 			for (size_t i=0; i < mat->rows / 2; i++) {
 				j = mat->rows - 1 - i;
 
 				if (i != j) {
 					swapRows(mat, i, j);
-					recordSwap(i, j, toSwap, swaps, swapsMade);
+					recordSwap(tracker, i, j, type);
 				}
 			}
 
@@ -22,25 +22,25 @@ void mirrorMatrix(Matrix* mat, SwapType toSwap, Swap** swaps, size_t* swapsMade)
 
 				if (i != j) {
 					swapCols(mat, i, j);
-					recordSwap(i, j, toSwap, swaps, swapsMade);
+					recordSwap(tracker, i, j, type);
 				}
 			}
 
 			break;
 
 		default:
-			fprintf("Can't mirror your matrix with the given option :\n\ttoSwap = %d", toSwap);
+			fprintf(stderr, "Can't mirror your matrix with the given option :\n\ttype = %d", type);
 			exit(EXIT_FAILURE);
 	}
 }
 
-bool inversibiltyCheck(Matrix* mat) {
+bool inversibiltyCheck(Matrix* mat, Tracker* tracker) {
 	bool result = true;
 
 	result &= mat->cols == mat->rows;
 
 	if (result) {
-		prepareGauss();
+		prepareGauss(mat, tracker);
 	}
 
 	return result;
