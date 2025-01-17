@@ -4,8 +4,10 @@
 #define __64_BITS__
 
 #if defined(__64_BITS__)
+#undef VALUE_TYPE
 #define VALUE_TYPE double
 #elif defined(__32_BITS__)
+#undef VALUE_TYPE
 #define VALUE_TYPE float
 #else
 #error Unsupported target
