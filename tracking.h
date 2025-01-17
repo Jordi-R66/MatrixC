@@ -1,6 +1,7 @@
 #pragma once
 
 #include "common.h"
+#include "matrix.h"
 
 enum TransformationType {
 	SWAP = 0,
@@ -12,7 +13,8 @@ typedef enum TransformationType TransformationType;
 
 enum SwapType {
 	Row = 0,
-	Column = 1
+	Column = 1,
+	None = 2
 };
 
 typedef enum SwapType SwapType;
@@ -34,3 +36,19 @@ struct MatrixTransformation {
 };
 
 typedef struct MatrixTransformation MatrixTransformation;
+
+struct Tracker {
+	size_t transformationMade;
+	MatrixTransformation* transformations;
+};
+
+typedef struct Tracker Tracker;
+
+void InitTracker(Tracker* tracker);
+void deallocTracker(Tracker* tracker);
+
+void RecordTransformation(Tracker* tracker, MatrixTransformation transformation);
+
+void recordSwap(Tracker* tracker, size_t idA, size_t idB, SwapType type);
+void recordSub(Tracker* tracker, size_t idA, size_t idB, value_t coeff);
+void recordMul(Tracker* tracker, size_t idA, value_t coeff);

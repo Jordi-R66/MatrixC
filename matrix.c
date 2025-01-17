@@ -153,28 +153,6 @@ void printMatrix(Matrix* matrix) {
 
 // Originally in gauss.c
 
-
-void recordSwap(size_t idA, size_t idB, SwapType type, Swap** swaps, size_t* swapsMade) {
-	if (idA == idB) {
-		return;
-	}
-
-	*swapsMade += 1;
-
-	Swap* newPtr = (Swap*)realloc(*swaps, *swapsMade * sizeof(Swap));
-
-	if (newPtr != NULL) {
-		*swaps = newPtr;
-	}
-	else {
-		fprintf(stderr, "Error or not enough space available in memory to continue\n");
-		exit(EXIT_FAILURE);
-	}
-
-	Swap newSwap = { idA, idB, type };
-	(*swaps)[*swapsMade - 1] = newSwap;
-}
-
 void swapRows(Matrix* mat, size_t rowAId, size_t rowBId) {
 	if (rowAId == rowBId) {
 		return;
