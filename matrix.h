@@ -2,12 +2,14 @@
 
 #include "common.h"
 
-typedef struct Matrix {
+struct Matrix {
 	size_t rows, cols, size;
 
 	value_t* data;
 	bool memFreed;
-} Matrix;
+};
+
+typedef struct Matrix Matrix;
 
 void allocMatrix(Matrix* matrix);
 void deallocMatrix(Matrix* matrix);
