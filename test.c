@@ -1,9 +1,8 @@
-#include "common.h"
-#include "matrix.h"
-
-#include "gauss.h"
+#include "advMatrix.h"
 
 int main(void) {
+	Tracker tracker;
+	InitTracker(&tracker);
 	Matrix A;
 
 	A.rows = 3;
@@ -18,11 +17,15 @@ int main(void) {
 
 	setMatrix(&A, A_content);
 
-	Gauss(&A);
+	Gauss(&A, &tracker);
 
 	printMatrix(&A);
 
+	printf("Freeing ...\n");
+	deallocTracker(&tracker);
+	printf("Tracker freed\n");
 	deallocMatrix(&A);
+	printf("Done\n");
 
 	return 0;
 }
