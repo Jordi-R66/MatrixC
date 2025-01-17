@@ -157,11 +157,7 @@ void Gauss(Matrix* mat) {
 	prepareGauss(mat, &swaps, &swapsMade);
 	size_t* rowsGaussPivots = (size_t*)calloc(mat->rows, sizeof(size_t));
 
-	for (size_t i = 0; i < mat->rows; i++) {
-		rowsGaussPivots[i] = identifyGaussPivot(mat, i);
-	}
-
-	for (size_t i = 0; i < mat->rows; i++) {
+	/*for (size_t i = 0; i < mat->rows; i++) {
 		getMatrixColumn(mat, i, col);
 
 		if (col[i] != 0) {
@@ -170,6 +166,22 @@ void Gauss(Matrix* mat) {
 				printf("i, j = %lu, %lu\n", i, j);
 				subtractRows(mat, j, i, coeff);
 			}
+		}
+	}*/
+
+	for (size_t i = 0; i < mat->rows; i++) {
+		size_t refColId = rowsGaussPivots[i];
+
+		if (getMatrixCase(mat, i, refColId) != 0.0) {
+			getMatrixColumn(mat, refColId, col);
+
+			for (size_t j = i + 1; j < mat->rows; j++) {
+				value_t coeff = col[j] / col[i];
+				printf("i, j = %lu, %lu\n", i, j);
+				subtractRows(mat, j, i, coeff);
+			}
+
+			generatePivotsArray(mat, rowsGaussPivots);
 		}
 	}
 
