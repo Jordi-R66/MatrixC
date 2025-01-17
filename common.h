@@ -1,13 +1,12 @@
 #pragma once
 
-#define VALUE_TYPE
+#ifndef __GCC__
 #define __64_BITS__
+#endif
 
-#if defined(__64_BITS__)
-#undef VALUE_TYPE
+#ifdef __64_BITS__
 #define VALUE_TYPE double
 #elif defined(__32_BITS__)
-#undef VALUE_TYPE
 #define VALUE_TYPE float
 #else
 #error Unsupported target
