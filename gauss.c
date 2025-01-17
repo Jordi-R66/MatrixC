@@ -45,7 +45,7 @@ size_t chooseSortingPivot(size_t min, size_t max) {
 	//return randomIndex(min, max);
 }
 
-void sortingSwap(Matrix* mat, size_t* pivots, size_t idA, size_t idB, Swap** swaps, size_t* swapsMade) {
+void sortingSwap(Matrix* mat, size_t* pivots, size_t idA, size_t idB, Tracker* tracker) {
 	if (idA == idB) {
 		return;
 	}
@@ -53,7 +53,7 @@ void sortingSwap(Matrix* mat, size_t* pivots, size_t idA, size_t idB, Swap** swa
 	swapRows(mat, idA, idB);
 	swapElements(pivots, idA, idB);
 
-	recordSwap(idA, idB, Row, swaps, swapsMade);
+	recordSwap(tracker, idA, idB, Row);
 }
 
 /* -- QuickSort implementation, needs to be fixed so implemented BubbleSort instead
@@ -119,7 +119,7 @@ void QuickSort(Matrix* mat, size_t firstId, size_t lastId, Swap** swaps, size_t*
 }
 */
 
-void BubbleSort(Matrix* mat, Swap** swaps, size_t* swapsMade) {
+void BubbleSort(Matrix* mat, Tracker* tracker) {
 	size_t* rowsGaussPivots = (size_t*)calloc(mat->rows, sizeof(size_t));
 
 	generatePivotsArray(mat, rowsGaussPivots);
@@ -130,7 +130,7 @@ void BubbleSort(Matrix* mat, Swap** swaps, size_t* swapsMade) {
 	for (i = 0; i < n - 1; i++) {
 		for (j = 0; j < n - i - 1; j++) {
 			if (rowsGaussPivots[j] > rowsGaussPivots[j + 1]) {
-				sortingSwap(mat, rowsGaussPivots, j, j + 1, swaps, swapsMade);
+				sortingSwap(mat, rowsGaussPivots, j, j + 1, tracker);
 			}
 		}
 	}
@@ -140,21 +140,19 @@ void BubbleSort(Matrix* mat, Swap** swaps, size_t* swapsMade) {
 	free(rowsGaussPivots);
 }
 
-void prepareGauss(Matrix* mat, Swap** swaps, size_t* swapsMade) {
-	*swaps = (Swap*)malloc(1 * sizeof(Swap));
-	*swapsMade = 0;
+void prepareGauss(Matrix* mat, Tracker* tracker) {
+	if (tracker->initialised == false) {
+		InitTracker(tracker);
+	}
 
 	//QuickSort(mat, 0, mat->rows - 1, swaps, swapsMade);
-	BubbleSort(mat, swaps, swapsMade);
+	BubbleSort(mat, tracker);
 }
 
-void Gauss(Matrix* mat) {
-	Swap* swaps;
-	size_t swapsMade;
-
+void Gauss(Matrix* mat, Tracker* tracker) {
 	value_t* col = (value_t*)calloc(mat->rows, sizeof(value_t));
 
-	prepareGauss(mat, &swaps, &swapsMade);
+	prepareGauss(mat, tracker);
 	size_t* rowsGaussPivots = (size_t*)calloc(mat->rows, sizeof(size_t));
 
 	/*for (size_t i = 0; i < mat->rows; i++) {
@@ -185,7 +183,11 @@ void Gauss(Matrix* mat) {
 		}
 	}
 
+	printf("Gauss done\n");
+
 	free(rowsGaussPivots);
 	free(col);
-	free(swaps);
+
+	printf("Freed\n");
+
 }
