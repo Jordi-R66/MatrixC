@@ -7,14 +7,12 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "gauss.c",
-                "matrix.c",
-                "test.c",
+                "${workspaceFolder}/*.c",
                 "-o",
-                "${workspaceFolder}/test.elf"
+                "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${fileDirname}"
             },
             "problemMatcher": [
                 "$gcc"
@@ -26,33 +24,5 @@
             "detail": "Tâche générée par le débogueur."
         }
     ],
-    "version": "2.0.0",
-    "configurations": [
-        {
-            "name": "Déboguer test.c",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/test.elf",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Activer l'impression de type gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "C/C++: gcc générer le fichier actif",
-            "miDebuggerPath": "/usr/bin/gdb",
-            "logging": {
-                "moduleLoad": false,
-                "trace": false
-            },
-            "internalConsoleOptions": "openOnSessionStart"
-        }
-    ]
+    "version": "2.0.0"
 }
