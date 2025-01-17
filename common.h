@@ -24,33 +24,31 @@ enum TransformationType {
 	SWAP = 0,
 	SUB = 1,
 	MUL = 2
-} TransformationType;
+};
 
-typedef enum SwapType {
+typedef enum TransformationType TransformationType;
+
+enum SwapType {
 	Row = 0,
 	Column = 1
-} SwapType;
+};
 
-typedef struct Swap {
+typedef enum SwapType SwapType;
+
+struct Swap {
 	size_t A, B;
 	SwapType type;
-} Swap;
+};
 
-typedef struct MatrixTransformation {
+typedef struct Swap Swap;
+
+struct MatrixTransformation {
 	TransformationType transType;
 
 	size_t A, B;
 	value_t coeff;
 
 	SwapType swapType;
-} MatrixTransformation;
+};
 
-#if defined(__x86_64__) || defined(_M_X64)
-#define VALUE_TYPE double
-#elif defined(__i386__) || defined(_M_IX86)
-#define VALUE_TYPE float
-#else
-#error Unsupported target
-#endif
-
-typedef VALUE_TYPE value_t;
+typedef struct MatrixTransformation MatrixTransformation;
