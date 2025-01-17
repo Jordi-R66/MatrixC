@@ -38,6 +38,7 @@ struct MatrixTransformation {
 typedef struct MatrixTransformation MatrixTransformation;
 
 struct Tracker {
+	bool initialised, memFreed;
 	size_t transformationMade;
 	MatrixTransformation* transformations;
 };

@@ -3,11 +3,19 @@
 void InitTracker(Tracker* tracker) {
 	tracker->transformationMade = 0;
 	tracker->transformations = (MatrixTransformation*)calloc(1, sizeof(MatrixTransformation));
+	
+	if (tracker->transformations == NULL) {
+		fprintf(stderr, "Error or not enough space available in memory to continue\n");
+		exit(EXIT_FAILURE);
+	}
+
+	tracker->initialised = true;
+	tracker->memFreed = false;
 }
 
 void RecordTransformation(Tracker* tracker, MatrixTransformation transformation) {
 	tracker->transformationMade += 1;
-	MatrixTransformation* newPtr = (MatrixTransformation*)realloc(tracker->transformationMade, sizeof(MatrixTransformation));
+	MatrixTransformation* newPtr = (MatrixTransformation*)realloc(tracker->transformations, sizeof(MatrixTransformation));
 
 	if (newPtr != NULL) {
 		tracker->transformations = newPtr;
@@ -27,6 +35,7 @@ void deallocTracker(Tracker* tracker) {
 
 	free(tracker->transformations);
 	tracker->transformationMade = 0;
+	tracker->memFreed = true;
 
 	memset(tracker, 0, sizeof(Tracker));
 }
@@ -77,7 +86,7 @@ void recordMul(Tracker* tracker, size_t idA, value_t coeff) {
 	transformation.transType = MUL;
 
 	transformation.A = idA;
-	transformation.B = NULL;
+	transformation.B = idA;
 	transformation.coeff = coeff;
 
 	transformation.swapType = None;
