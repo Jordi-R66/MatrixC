@@ -25,6 +25,12 @@ size_t identifyGaussPivot(Matrix* mat, size_t rowId) {
 	return i;
 }
 
+void generatePivotsArray(Matrix* mat, size_t* rowsGaussPivots) {
+	for (size_t i = 0; i < mat->rows; i++) {
+		rowsGaussPivots[i] = identifyGaussPivot(mat, i);
+	}
+}
+
 void swapElements(size_t* arr, size_t a, size_t b) {
 	size_t c;
 
@@ -116,9 +122,7 @@ void QuickSort(Matrix* mat, size_t firstId, size_t lastId, Swap** swaps, size_t*
 void BubbleSort(Matrix* mat, Swap** swaps, size_t* swapsMade) {
 	size_t* rowsGaussPivots = (size_t*)calloc(mat->rows, sizeof(size_t));
 
-	for (size_t i = 0; i < mat->rows; i++) {
-		rowsGaussPivots[i] = identifyGaussPivot(mat, i);
-	}
+	generatePivotsArray(mat, rowsGaussPivots);
 
 	size_t i, j;
 	size_t n = mat->rows;
@@ -131,9 +135,7 @@ void BubbleSort(Matrix* mat, Swap** swaps, size_t* swapsMade) {
 		}
 	}
 
-	for (size_t i = 0; i < mat->rows; i++) {
-		rowsGaussPivots[i] = identifyGaussPivot(mat, i);
-	}
+	generatePivotsArray(mat, rowsGaussPivots);
 
 	free(rowsGaussPivots);
 }
