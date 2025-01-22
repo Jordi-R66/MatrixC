@@ -53,3 +53,5 @@ void RecordTransformation(Tracker* tracker, MatrixTransformation transformation)
 void recordSwap(Tracker* tracker, size_t idA, size_t idB, SwapType type);
 void recordSub(Tracker* tracker, size_t idA, size_t idB, value_t coeff);
 void recordMul(Tracker* tracker, size_t idA, value_t coeff);
+
+void printTrackingLogs(Tracker* tracker);
