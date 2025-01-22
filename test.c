@@ -11,15 +11,17 @@ int main(void) {
 	allocMatrix(&A);
 
 	value_t A_content[] = {
-		2, -2, 3, 2,
-		1, 2, -1, 3,
-		3, -1, 2, 1 };
+		0, -2, 3, 2,
+		0, 2, -1, 3,
+		0, -1, 2, 1 };
 
 	setMatrix(&A, A_content);
 
 	Gauss(&A, &tracker);
 
 	printMatrix(&A);
+
+	printTrackingLogs(&tracker);
 
 	printf("Freeing ...\n");
 	deallocTracker(&tracker);

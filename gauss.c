@@ -175,7 +175,7 @@ void Gauss(Matrix* mat, Tracker* tracker) {
 
 			for (size_t j = i + 1; j < mat->rows; j++) {
 				value_t coeff = col[j] / col[i];
-				printf("i, j = %lu, %lu\n", i, j);
+				//printf("i, j = %lu, %lu\n", i, j);
 				subtractRows(mat, j, i, coeff);
 			}
 
