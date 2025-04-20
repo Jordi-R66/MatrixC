@@ -155,7 +155,27 @@ void Gauss(Matrix* mat, Tracker* tracker) {
 	prepareGauss(mat, tracker);
 	size_t* rowsGaussPivots = (size_t*)calloc(mat->rows, sizeof(size_t));
 
+	for (size_t l = 0; l < mat->rows; l++) {
+		generatePivotsArray(mat, rowsGaussPivots);
+
+		size_t p = rowsGaussPivots[l];
+		value_t pivot_val = getMatrixCase(mat, l, p);
+
+		for (size_t i = l + 1; i < mat->rows; i++) {
+			value_t val = getMatrixCase(mat, i, p);
+
+			if (val != 0.0) {
+				value_t coeff = pivot_val / val;
+				printf("%lu, %lu, %lf, (%lf, %lf)\n", i, l, coeff, pivot_val, val);
+				subtractRows(mat, i, l, coeff);
+			}
+		}
+	}
+
+	printf("\n");
+
 	/*for (size_t i = 0; i < mat->rows; i++) {
+		generatePivotsArray(mat, rowsGaussPivots);
 		getMatrixColumn(mat, i, col);
 
 		if (col[i] != 0) {
@@ -167,7 +187,7 @@ void Gauss(Matrix* mat, Tracker* tracker) {
 		}
 	}*/
 
-	for (size_t i = 0; i < mat->rows; i++) {
+	/*for (size_t i = 0; i < mat->rows; i++) {
 		size_t refColId = rowsGaussPivots[i];
 
 		if (getMatrixCase(mat, i, refColId) != 0.0) {
@@ -181,7 +201,7 @@ void Gauss(Matrix* mat, Tracker* tracker) {
 
 			generatePivotsArray(mat, rowsGaussPivots);
 		}
-	}
+	}*/
 
 	printf("Gauss done\n");
 
