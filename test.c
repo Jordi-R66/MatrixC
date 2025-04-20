@@ -1,33 +1,33 @@
-#include "advMatrix.h"
+#include "matrix.h"
 
 int main(void) {
-	Tracker tracker;
-	InitTracker(&tracker);
-	Matrix A;
 
-	A.rows = 3;
-	A.cols = 4;
+	Matrix A, B, C;
+
+	A.cols = 3;
+	A.rows = 2;
+
+	B.cols = 2;
+	B.rows = 3;
+
+	value_t A_values[6] = {1, 4, 2, 0, -1, 3};
+	value_t B_values[6] = {3, 1, 2, -2, -1, 5};
 
 	allocMatrix(&A);
+	allocMatrix(&B);
 
-	value_t A_content[] = {
-		0, -2, 3, 2,
-		0, 2, -1, 3,
-		0, -1, 2, 1 };
+	setMatrix(&A, A_values);
+	setMatrix(&B, B_values);
 
-	setMatrix(&A, A_content);
-
-	Gauss(&A, &tracker);
+	matrixMultiplication(&A, &B, &C);
 
 	printMatrix(&A);
+	printMatrix(&B);
+	printf("\n");
+	printMatrix(&C);
 
-	printTrackingLogs(&tracker);
-
-	printf("Freeing ...\n");
-	deallocTracker(&tracker);
-	printf("Tracker freed\n");
 	deallocMatrix(&A);
-	printf("Done\n");
+	deallocMatrix(&B);
 
 	return 0;
 }
