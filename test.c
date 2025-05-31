@@ -2,32 +2,42 @@
 
 int main(void) {
 
-	Matrix A, B, C;
+	Matrix M, A, B, C, D, E;
 
-	A.cols = 3;
-	A.rows = 2;
+	M.rows = 4;
+	M.cols = M.rows;
 
-	B.cols = 2;
-	B.rows = 3;
+	allocMatrix(&M);
 
-	value_t A_values[6] = {1, 4, 2, 0, -1, 3};
-	value_t B_values[6] = {3, 1, 2, -2, -1, 5};
+	value_t vals[16] = {0, 2, 1, 1,
+						2, 2, 0, 0,
+						1, 0, 0, 3,
+						1, 0, 3, 0};
 
-	allocMatrix(&A);
-	allocMatrix(&B);
+	setMatrix(&M, vals);
 
-	setMatrix(&A, A_values);
-	setMatrix(&B, B_values);
-
-	matrixMultiplication(&A, &B, &C);
+	printMatrix(&M);
+	printf("EXP 2 -------------------------------------------------------\n");
+	matrixMultiplication(&M, &M, &A);
 
 	printMatrix(&A);
+	printf("EXP 3 -------------------------------------------------------\n");
+	matrixMultiplication(&A, &M, &B);
+
 	printMatrix(&B);
-	printf("\n");
+	printf("EXP 4-------------------------------------------------------\n");
+	matrixMultiplication(&B, &M, &C);
+
 	printMatrix(&C);
+
+	size_t n = getMatrixCase(&C, 2, 4);
+
+	printf("%zu parcours\n", n);
 
 	deallocMatrix(&A);
 	deallocMatrix(&B);
+	deallocMatrix(&C);
+	deallocMatrix(&M);
 
 	return 0;
 }

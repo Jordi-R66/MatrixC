@@ -77,7 +77,8 @@ void scalarMul(Matrix* matrix, value_t scalar) {
 */
 void matrixMultiplication(Matrix* matA, Matrix* matB, Matrix* matDest) {
 	if (matA->cols != matB->rows) {
-		return;
+		fprintf(stderr, "Can't multiply the given matrices, matA.cols != matB.rows\n");
+		exit(EXIT_FAILURE);
 	}
 
 	matDest->rows = matA->rows;
@@ -85,8 +86,8 @@ void matrixMultiplication(Matrix* matA, Matrix* matB, Matrix* matDest) {
 
 	allocMatrix(matDest);
 
-	value_t* col = (value_t*)calloc(matDest->rows, sizeof(value_t));
-	value_t* row = (value_t*)calloc(matDest->cols, sizeof(value_t));
+	value_t* col = (value_t*)calloc(matB->rows, sizeof(value_t));
+	value_t* row = (value_t*)calloc(matA->cols, sizeof(value_t));
 
 	for (size_t i = 0; i < matDest->rows; i++) {
 		for (size_t j = 0; j < matDest->cols; j++) {
@@ -95,7 +96,7 @@ void matrixMultiplication(Matrix* matA, Matrix* matB, Matrix* matDest) {
 			getMatrixRow(matA, i, row);
 			getMatrixColumn(matB, j, col);
 
-			for (size_t k = 0; k < matB->cols; k++) {
+			for (size_t k = 0; k <= matB->cols; k++) {
 				newValue += col[k] * row[k];
 			}
 
